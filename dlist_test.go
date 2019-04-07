@@ -5,8 +5,8 @@ import (
 	"testing"
 )
 
-func TestBasicListPush(t *testing.T) {
-	b := NewBasicList()
+func TestListPush(t *testing.T) {
+	b := NewList()
 	for x := 100; x < 106; x++ {
 		b.Push(x)
 	}
@@ -25,7 +25,7 @@ func TestBasicListPush(t *testing.T) {
 	printList(b, t)
 }
 
-func printList(b *BasicList, t *testing.T) {
+func printList(b *List, t *testing.T) {
 	for x := b.Head(); x != b.Sentinel(); x = *x.next {
 		t.Log(x.key)
 	}
