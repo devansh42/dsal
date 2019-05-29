@@ -36,3 +36,5 @@ func (s *BasicStack) Pop() (interface{}, error) {
 func (s *BasicStack) Length() int {
 	return s.i + 1
 }
+
+//google-site-verification=G5uuV911Fd454yXIF4iAZsIzrrEfqPrl1cgEkAWDnl4

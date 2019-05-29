@@ -30,9 +30,10 @@ func (h *Heap) swap(x, y int) {
 }
 
 //heapify, heapify an index in Heap according to it's heap property
+//runs only when index is smaller than length of heap array and non negative and less than middle index because all the index greater than middle index will be leave in heap
 func (h *Heap) heapify(i int) {
 
-	if i < h.l() && i > -1 && i < h.l()>>1 { //runs only when index is smaller than length of heap array and non negative and less than middle index
+	if i < h.l() && i > -1 && i < h.l()>>1 {
 		var t int = i
 		if h.comp(h.ar[h.lt(i)], h.ar[t]) {
 			t = h.lt(i)
@@ -56,7 +57,7 @@ func (h *Heap) buildheap() {
 	}
 }
 func (h *Heap) GetHeap() []int {
-	return h.ar
+	return h.ar[0:h.length]
 }
 
 //l, returns size of heap
