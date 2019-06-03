@@ -21,3 +21,13 @@ func (s *StackList) Pop() (interface{}, error) {
 func (s StackList) Length() int {
 	return s.slist.Length()
 }
+
+//DropStack, drops all the elements of the "src" into the "dest" stack
+//And makes "src" empty
+func DropStack(dest, src *StackList) {
+	for src.Length() > 0 {
+		i, _ := src.Pop()
+		dest.Push(i)
+	}
+
+}
