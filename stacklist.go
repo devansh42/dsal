@@ -5,7 +5,7 @@ import "errors"
 
 //StackList, is the stack implemented by single linked list
 type StackList struct {
-	slist SingleList
+	slist *SingleList
 }
 
 func (s *StackList) Push(v interface{}) {
@@ -30,4 +30,11 @@ func DropStack(dest, src *StackList) {
 		dest.Push(i)
 	}
 
+}
+
+//NewStackList returns pointer to new stack list
+func NewStackList() *StackList {
+	x := new(StackList)
+	x.slist = NewSingleList()
+	return x
 }
