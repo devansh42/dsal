@@ -6,12 +6,9 @@ func NewSingleList() *SingleList {
 	b := new(SingleList)
 	b.null = new(ListSNode)
 	b.tail = b.null
+	b.null.next = b.null
+	//sentinel node is initially header and tail also for the linked list
 	return b
-}
-
-type ListSNode struct {
-	next *ListSNode
-	key  interface{}
 }
 
 type SingleList struct {
@@ -30,6 +27,15 @@ func (b *SingleList) Pop() interface{} {
 		return v
 	}
 	return nil
+}
+
+//PrePend, insert a node at the head of list
+func (s *SingleList) PrePend(v interface{}) {
+	n := new(ListSNode)
+	n.key = v
+	n.next = s.null.next
+	s.null.next = n
+	s.length++
 }
 
 //Push, Pushes a new node at the end of List
@@ -100,6 +106,16 @@ func (b SingleList) At(i int) interface{} {
 }
 
 //Sentinel, returns the sentinel node used in list implementation
-func (b SingleList) Sentinel() ListSNode {
-	return *b.null
+func (b SingleList) Sentinel() *ListSNode {
+	return b.null
+}
+
+//DecLength, decreases length of linked list by 'v'
+func (b *SingleList) DecLength(v int) {
+	b.length -= v
+}
+
+//IncLength, increases length of linked list by 'v'
+func (b *SingleList) IncLength(v int) {
+	b.length += v
 }
