@@ -13,10 +13,21 @@ func TestSingleList(t *testing.T) {
 	t.Log(b.Tail())
 	t.Log(b.Pop())
 	printsList(b, t)
-	t.Log(b.Find(89).key)
+	t.Log(b.Find(15).key)
+	b.Pop()
+	printsList(b, t)
 }
 func printsList(b *SingleList, t *testing.T) {
 	for x := b.null.next; x != b.null; x = x.next {
 		t.Log(x.key)
 	}
+}
+
+func TestPrepend(t *testing.T) {
+	x := NewSingleList()
+	x.PrePend(1)
+	x.PrePend(2)
+	x.PrePend(3)
+	x.PrePend(4)
+	printsList(x, t)
 }

@@ -17,14 +17,15 @@ type SingleList struct {
 	length     int
 }
 
+//Pop, removes a node at front of list
 func (b *SingleList) Pop() interface{} {
 	if b.length > 0 {
-		v := b.tail.key
-		b.pot.next = b.null //Previous of tail to sentinel node
-		b.tail = nil        //Deleting tail node
-		b.tail = b.pot      //Making previous tail new tail
+		head := b.null.next
+		b.null.next = head.next
+		k := head.key
+		head = nil
 		b.length--
-		return v
+		return k
 	}
 	return nil
 }
@@ -73,13 +74,13 @@ func (b SingleList) Find(key interface{}) ListSNode {
 }
 
 //Head, returns Head of the List as a value for immutiblity reasons
-func (b SingleList) Head() ListSNode {
-	return *b.null.next
+func (b SingleList) Head() *ListSNode {
+	return b.null.next
 }
 
 //Tail, returns Tail of the List as a value for immutibilty reasons
-func (b SingleList) Tail() ListSNode {
-	return *b.tail
+func (b SingleList) Tail() *ListSNode {
+	return b.tail
 }
 
 //At, returns key value at given index, returns nil if index out of bound

@@ -2,6 +2,9 @@ package dsal
 
 //Bit Array Implementation in Go
 
+//BitArray is an array implementation for bit blobs.
+//Internally it maintains a uint8 array
+//Which helps to store 'n' bits in n/8 length uint8 array
 type BitArray struct {
 	ar   []uint8
 	size int64
