@@ -9,7 +9,7 @@ type StackList struct {
 }
 
 func (s *StackList) Push(v interface{}) {
-	s.slist.Push(v)
+	s.slist.PrePend(v)
 }
 func (s *StackList) Pop() (interface{}, error) {
 	v := s.slist.Pop()
