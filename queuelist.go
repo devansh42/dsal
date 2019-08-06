@@ -24,11 +24,7 @@ func (s QueueList) Enqueue(v interface{}) {
 
 func (s QueueList) Dequeue() (interface{}, error) {
 	if s.Length() > 0 {
-		k := s.slist.null.next
-		s.slist.null.next = k.next
-		v := k.key
-		k = nil
-		s.slist.length-- //Decrease length of single list
+		v := s.slist.Pop()
 		return v, nil
 	}
 	return nil, errors.New("Queue underflow")

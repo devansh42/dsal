@@ -5,14 +5,14 @@ import "testing"
 
 func TestQueueList(t *testing.T) {
 	l := NewQueueList()
-	for x := 70; x < 110; x++ {
+	for x := 70; x < 75; x++ {
 		l.Enqueue(x)
 	}
 	printQueuelist(*l, t)
 }
 
 func printQueuelist(l QueueList, t *testing.T) {
-	for l.Length() != 0 {
+	for l.Length() > 0 {
 		t.Log(l.Dequeue())
 	}
 }
