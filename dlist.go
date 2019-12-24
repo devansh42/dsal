@@ -10,11 +10,6 @@ func NewList() *List {
 	return b
 }
 
-type ListNode struct {
-	next, prev *ListNode
-	key        interface{}
-}
-
 type List struct {
 	null   *ListNode
 	length int
