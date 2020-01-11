@@ -1,5 +1,3 @@
-//@author Devansh Gupta
-//BasicStack is the Array Stack Implementation
 package dsal
 
 import "errors"
@@ -8,22 +6,25 @@ import "errors"
 func NewBasicStack(size int) *BasicStack {
 	b := new(BasicStack)
 	b.array = make([]interface{}, size)
+	b.i = 0
 	return b
 }
 
-//BasicStack, is the array implementation in stack data structure
+//BasicStack, is the array implementation of stack data structure
 type BasicStack struct {
 	array []interface{}
 	i     int
 }
 
-func (s *BasicStack) Push(v interface{}) error {
-	if s.i >= len(s.array) {
-		return errors.New("Stackoverflow")
+func (s *BasicStack) Push(v interface{}) (err error) {
+	if s.i < len(s.array) {
+
+		s.array[s.i] = v
+		s.i++
+	} else {
+		err = errors.New("Stackoverflow")
 	}
-	s.array[s.i] = v
-	s.i++
-	return nil
+	return
 }
 func (s *BasicStack) Pop() (interface{}, error) {
 	if s.i <= 0 {
@@ -37,4 +38,46 @@ func (s *BasicStack) Length() int {
 	return s.i + 1
 }
 
-//google-site-verification=G5uuV911Fd454yXIF4iAZsIzrrEfqPrl1cgEkAWDnl4
+func (s *BasicStack) Begin() Iterator {
+
+	return &basicStackIterator{beg: 0, end: uint(len(s.array) - 1), cur: 0, array: &s.array}
+}
+
+func (s *BasicStack) End() Iterator {
+	return &basicStackIterator{beg: 0, end: uint(len(s.array) - 1), cur: uint(len(s.array) - 1), array: &s.array}
+
+}
+
+type basicStackIterator arrayIterableAttrs
+
+func (b *basicStackIterator) Next() (v interface{}, err error) {
+	ar := *b.array
+	if b.HasNext() {
+		v = ar[b.cur]
+		b.cur++
+
+	} else {
+		err = errors.New("Iterator is out of bound")
+	}
+	return
+}
+func (b *basicStackIterator) Prev() (v interface{}, err error) {
+	ar := *b.array
+	if b.HasPrev() {
+		v = ar[b.cur]
+		b.cur--
+	} else {
+		err = errors.New("Iterator is out of bound")
+
+	}
+	return
+}
+func (b basicStackIterator) HasNext() bool {
+	return b.cur <= b.end && b.inBounds()
+}
+func (b basicStackIterator) HasPrev() bool {
+	return b.cur >= b.beg && b.inBounds()
+}
+func (b basicStackIterator) inBounds() bool {
+	return b.cur <= b.end && b.cur >= b.beg
+}
