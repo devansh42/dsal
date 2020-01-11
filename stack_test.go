@@ -49,3 +49,9 @@ func TestStackPop(t *testing.T) {
 	}
 
 }
+func TestPushAndPop(t *testing.T) {
+	x := NewBasicStack(5)
+	x.Push(555)
+	v, _ := x.Pop()
+	t.Log(v)
+}

@@ -6,28 +6,29 @@ import "errors"
 func NewBasicStack(size int) *BasicStack {
 	b := new(BasicStack)
 	b.array = make([]interface{}, size)
-	b.i = 0
+	b.i = -1
 	return b
 }
 
 //BasicStack, is the array implementation of stack data structure
 type BasicStack struct {
 	array []interface{}
-	i     int
+	//i points to current head
+	i int
 }
 
 func (s *BasicStack) Push(v interface{}) (err error) {
 	if s.i < len(s.array) {
-
-		s.array[s.i] = v
 		s.i++
+		s.array[s.i] = v
+
 	} else {
 		err = errors.New("Stackoverflow")
 	}
 	return
 }
 func (s *BasicStack) Pop() (interface{}, error) {
-	if s.i <= 0 {
+	if s.i < 0 {
 		return nil, errors.New("Stackunderflow")
 	}
 	v := s.array[s.i]
@@ -44,7 +45,7 @@ func (s *BasicStack) Begin() Iterator {
 }
 
 func (s *BasicStack) End() Iterator {
-	return &basicStackIterator{beg: 0, end: uint(s.i), cur: uint(len(s.array) - 1), array: &s.array}
+	return &basicStackIterator{beg: 0, end: uint(s.i), cur: uint(s.i), array: &s.array}
 
 }
 
