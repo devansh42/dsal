@@ -40,11 +40,11 @@ func (s *BasicStack) Length() int {
 
 func (s *BasicStack) Begin() Iterator {
 
-	return &basicStackIterator{beg: 0, end: uint(len(s.array) - 1), cur: 0, array: &s.array}
+	return &basicStackIterator{beg: 0, end: uint(s.i), cur: 0, array: &s.array}
 }
 
 func (s *BasicStack) End() Iterator {
-	return &basicStackIterator{beg: 0, end: uint(len(s.array) - 1), cur: uint(len(s.array) - 1), array: &s.array}
+	return &basicStackIterator{beg: 0, end: uint(s.i), cur: uint(len(s.array) - 1), array: &s.array}
 
 }
 
