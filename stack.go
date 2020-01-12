@@ -18,7 +18,7 @@ type BasicStack struct {
 }
 
 func (s *BasicStack) Push(v interface{}) (err error) {
-	if s.i < len(s.array) {
+	if s.i < len(s.array)-1 {
 		s.i++
 		s.array[s.i] = v
 
@@ -41,7 +41,13 @@ func (s *BasicStack) Length() int {
 
 func (s *BasicStack) Begin() Iterator {
 
-	return &basicStackIterator{beg: 0, end: uint(s.i), cur: 0, array: &s.array}
+	var end int
+	if s.i < len(s.array) {
+		end = s.i
+	} else {
+		end = len(s.array) - 1
+	}
+	return &basicStackIterator{beg: 0, end: uint(end), cur: 0, array: &s.array}
 }
 
 func (s *BasicStack) End() Iterator {
